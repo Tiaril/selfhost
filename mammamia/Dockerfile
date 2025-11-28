@@ -4,7 +4,7 @@ FROM python:3.11-slim-bullseye
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Install git
+# Install git + tesseract
 RUN apt-get update && \
     apt-get install -y tesseract-ocr libtesseract-dev git && \
     apt-get clean && \
@@ -13,14 +13,15 @@ RUN apt-get update && \
 # Clone the repository
 RUN git clone --branch main https://github.com/Tiaril/MammaMia .
 
-# ADD update_domains.py update_domains.py
-# Install any needed packages specified in requirements.txt
+# ❌ RIMOSSO: ADD esterno (causa 404)
+# ADD https://raw.githubusercontent.com/nihon77/stremio-selfhosted/... update_domains.py
+
+# Install Python deps
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir pytesseract
 
-# Expose the port, for now default is 8080 cause it's the only one really allowed by HuggingFace
 EXPOSE 8080
 
-# Run run.py when the container launches
-#CMD ["python", "run.py"]
-CMD python update_domains.py && python run.py
+# Run startup scripts
+CMD python mammamia/update_domains.py && python run.py
+
