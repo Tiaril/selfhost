@@ -11,7 +11,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Clone the repository
-RUN git clone --branch main https://github.com/UrloMythus/MammaMia .
+RUN git clone --branch main https://github.com/Tiaril/MammaMia .
 
 ADD https://raw.githubusercontent.com/nihon77/stremio-selfhosted/refs/heads/main/mammamia/update_domains.py update_domains.py
 # ADD update_domains.py update_domains.py
