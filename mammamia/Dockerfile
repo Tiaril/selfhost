@@ -23,5 +23,5 @@ RUN pip install --no-cache-dir pytesseract
 EXPOSE 8080
 
 # Run startup scripts
-CMD python mammamia/update_domains.py && python run.py
+CMD python update_domains.py && python run.py
 
